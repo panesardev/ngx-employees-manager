@@ -1,0 +1,15 @@
+<div class="employees" *ngIf="employees; else showLoading">
+	<div *ngFor="let employee of employees">
+		<app-employee
+			[employee]="employee" 
+			(onView)="view($event)"
+			(onUpdate)="update($event)" 
+			(onDelete)="delete($event)">
+		</app-employee>
+	</div>
+</div>
+<ng-template #showLoading>
+	<div class="my-5">
+		<app-loading></app-loading>
+	</div>
+</ng-template>

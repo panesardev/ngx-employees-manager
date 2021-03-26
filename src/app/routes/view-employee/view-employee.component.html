@@ -1,0 +1,34 @@
+<section>
+	<p class="center my-2 heading">View Employee</p>
+	<table>
+		<tr>
+			<td>First name</td>
+			<td>{{ employee.firstName }}</td>
+		</tr>
+		<tr>
+			<td>Last name</td>
+			<td>{{ employee.lastName }}</td>
+		</tr>
+		<tr>
+			<td>Job title</td>
+			<td>{{ employee.jobTitle }}</td>
+		</tr>
+		<tr>
+			<td>Gender</td>
+			<td>{{ employee.gender == 'm' ? 'Male' : 'Female' }}</td>
+		</tr>
+		<tr>
+			<td>Date of birth</td>
+			<td>{{ employee.dob }}</td>
+		</tr>
+		<tr>
+			<td>Age</td>
+			<td>{{ employee.age }}</td>
+		</tr>
+	</table>
+	<div class="center my-5">
+		<button class="px-3 py-2 accent-btn mr-3" routerLink="/home">Home</button>
+		<button class="shadow px-3 py-2 accent-btn mr-3" routerLink="/update/{{ employee.id }}">Update</button>
+		<button class="shadow px-3 py-2 red-btn" routerLink="/delete/{{ employee.id }}">Delete</button>
+	</div>
+</section>

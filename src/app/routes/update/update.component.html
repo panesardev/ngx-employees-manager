@@ -1,0 +1,44 @@
+<section>
+	<p class="heading center my-2">Update Employee</p>
+	<form  class="form mx-auto">
+		<div class="my-2 error-div" *ngIf="error">
+			<p>{{ error }}</p>
+		</div>
+		<div class="my-2">
+			<label>First name <br>
+				<input type="text" name="first_name" [(ngModel)]="employee.firstName">
+			</label>
+		</div>
+		<div class="my-2">
+			<label>Last name <br>
+				<input type="text" name="last_name" [(ngModel)]="employee.lastName">
+			</label>
+		</div>
+		<div class="my-2">
+			<label>Date of birth <br>
+				<input type="date" [value]="employee.dob | date:'yyyy-MM-dd'" 
+					(input)="employee.dob = parseDate($event.target.value);" 
+					(change)="employee.age = calculateAge(employee.dob)">
+			</label>
+		</div>
+		<div class="my-2">
+			<label>Job title <br>
+				<input type="text" name="job_title" [(ngModel)]="employee.jobTitle">
+			</label>
+		</div>
+		<div class="my-2">
+			<label class="radio">
+					<input type="radio" name="gender" [(ngModel)]="employee.gender" value="m">
+					<span>Male</span>
+			</label>
+			<label class="radio">
+					<input type="radio" name="gender" [(ngModel)]="employee.gender" value="f">
+					<span>Female</span>
+			</label>
+		</div>
+		<div class="my-2">
+			<button class="red-btn px-3 py-2 mr-3" routerLink="/home">Cancel</button>
+			<button class="accent-btn px-3 py-2" (click)="update()">Update Employee</button>
+		</div>
+	</form>
+</section>

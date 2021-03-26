@@ -1,0 +1,21 @@
+@import '../../../variables.scss';
+
+table {
+	width: 90%;
+	max-width: 400px;
+	margin: 0 auto;
+	border-collapse: collapse;
+}
+
+table tr td {
+	padding: 10px 20px;
+}
+
+table tr td:nth-child(2) {
+	text-align: right;
+	border-bottom: .1rem solid $accent-light;
+}
+
+table tr td:nth-child(1) {
+	border: .1rem solid $accent-light;
+}

@@ -1,0 +1,19 @@
+<div class="p-2">
+	<div class="employee shadow">
+		<div class="top py-2 px-3">
+			<div>
+				<img [src]="employee.gender == 'm' ? 'assets/img/man.png' : 'assets/img/woman.png'"
+					height="50" width="50">
+			</div>
+			<div>
+				<p class="name px-3">{{ employee.firstName }} {{ employee.lastName }}</p>
+			</div>
+		</div>
+		<p class="job-title px-3 center">{{ employee.jobTitle }}</p>
+		<div class="buttons center pb-3">
+			<button class="shadow px-3 py-1 accent-btn mr-2" (click)="view()">View</button>
+			<button class="shadow px-3 py-1 accent-btn mr-2" (click)="update()">Update</button>
+			<button class="shadow px-3 py-1 red-btn" (click)="delete()">Delete</button>
+		</div>
+	</div>
+</div>
