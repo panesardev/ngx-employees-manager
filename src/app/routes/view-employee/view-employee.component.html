@@ -1,6 +1,6 @@
 <section>
 	<p class="center my-2 heading">View Employee</p>
-	<table>
+	<table class="my-3">
 		<tr>
 			<td>First name</td>
 			<td>{{ employee.firstName }}</td>
@@ -19,7 +19,7 @@
 		</tr>
 		<tr>
 			<td>Date of birth</td>
-			<td>{{ employee.dob }}</td>
+			<td>{{ employee.dob.toString().substr(0, 10) }}</td>
 		</tr>
 		<tr>
 			<td>Age</td>
@@ -27,7 +27,7 @@
 		</tr>
 	</table>
 	<div class="center my-5">
-		<button class="px-3 py-2 accent-btn mr-3" routerLink="/home">Home</button>
+		<button class="px-3 py-2 accent-btn mr-3 shadow" routerLink="/home">Home</button>
 		<button class="shadow px-3 py-2 accent-btn mr-3" routerLink="/update/{{ employee.id }}">Update</button>
 		<button class="shadow px-3 py-2 red-btn" routerLink="/delete/{{ employee.id }}">Delete</button>
 	</div>

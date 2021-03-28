@@ -11,6 +11,7 @@ body {
 	padding: 0;
   font-family: 'Open Sans';
   color: $text;
+  background-color: $accent-light;
 }
 
 section {
@@ -62,9 +63,6 @@ button {
   border: .1rem solid transparent;
   border-radius: 5px;
   background-color: $light;
-}
-
-button {
   user-select: none;
 }
 
@@ -99,7 +97,7 @@ button:hover, a:hover {
 }
 
 .shadow {
-	box-shadow: 0 0 15px rgba(88, 93, 99, 0.205);
+	box-shadow: 0 0 15px rgba(88, 93, 99, 0.315);
 }
 
 .container {

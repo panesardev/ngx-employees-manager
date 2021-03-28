@@ -4,7 +4,7 @@ table {
 	width: 90%;
 	max-width: 400px;
 	margin: 0 auto;
-	border-collapse: collapse;
+	font-size: 1.25rem;
 }
 
 table tr td {
@@ -13,9 +13,5 @@ table tr td {
 
 table tr td:nth-child(2) {
 	text-align: right;
-	border-bottom: .1rem solid $accent-light;
-}
-
-table tr td:nth-child(1) {
-	border: .1rem solid $accent-light;
+	font-weight: bold;
 }

@@ -11,6 +11,7 @@ import { EmployeeService } from 'src/app/services/employee.service';
 export class ViewEmployeeComponent implements OnInit {
 
   employee: Employee = new Employee();
+  dob: string;
 
   constructor(
     private employeeService: EmployeeService,
@@ -20,6 +21,7 @@ export class ViewEmployeeComponent implements OnInit {
   async ngOnInit(): Promise<void> {
     const id = this.route.snapshot.params.id;
     this.employee = await this.employeeService.find(id).toPromise();
+    this.dob = new Date(this.employee.dob).toLocaleDateString();
   }
 
 }
