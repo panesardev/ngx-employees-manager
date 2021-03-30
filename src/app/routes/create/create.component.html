@@ -1,32 +1,28 @@
 <section>
-	<p class="heading center my-2">Create Employee</p>
-	<form  class="form mx-auto">
-		<div class="my-2 error-div" *ngIf="error">
+	<p class="heading">Create Employee</p>
+	<form class="form">
+		<div class="mb-3 mt-2 error-div" *ngIf="error">
 			<p>{{ error }}</p>
 		</div>
-		<div class="my-2">
-			<label>First name <br>
-				<input type="text" name="first_name" [(ngModel)]="employee.firstName">
-			</label>
+		<div class="mb-3 mt-2">
+			<label>First name</label> <br>
+			<input class="mt-2" type="text" name="first_name" [(ngModel)]="employee.firstName">
 		</div>
-		<div class="my-2">
-			<label>Last name <br>
-				<input type="text" name="last_name" [(ngModel)]="employee.lastName">
-			</label>
+		<div class="my-3">
+			<label>Last name</label> <br>
+			<input class="mt-2" type="text" name="last_name" [(ngModel)]="employee.lastName">
 		</div>
-		<div class="my-2">
-			<label>Date of birth <br>
-				<input type="date" [value]="employee.dob | date:'yyyy-MM-dd'" 
-					(input)="employee.dob = parseDate($event.target.value);" 
-					(change)="employee.age = calculateAge(employee.dob)">
-			</label>
+		<div class="my-3">
+			<label>Date of birth</label> <br>
+			<input class="mt-2" type="date" [value]="employee.dob | date:'yyyy-MM-dd'" 
+				(input)="employee.dob = parseDate($event.target.value);" 
+				(change)="employee.age = calculateAge(employee.dob)">
 		</div>
-		<div class="my-2">
-			<label>Job title <br>
-				<input type="text" name="job_title" [(ngModel)]="employee.jobTitle">
-			</label>
+		<div class="my-3">
+			<label>Job title</label> <br>
+			<input class="mt-2" type="text" name="job_title" [(ngModel)]="employee.jobTitle">
 		</div>
-		<div class="my-2">
+		<div class="my-4">
 			<label class="radio">
 					<input type="radio" name="gender" [(ngModel)]="employee.gender" value="m">
 					<span>Male</span>

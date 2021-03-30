@@ -1,7 +1,7 @@
 @import '../../../variables.scss';
 
 .employee {
-	border-radius: 7px;
+	border-radius: 5px;
 	background-color: white;
 	animation: fadeIn 500ms ease;
 }
@@ -11,14 +11,15 @@
 	color: $light;
 	display: flex;
 	align-items: center;
-	border-radius: 7px;
+	border-radius: 5px;
 }	
 
-p.name, .job-title {
+p.name {
 	font-size: 1.4rem;
   font-family: 'Open Sans';
 }
 
 .job-title {
 	margin: 10px auto;
+	font-size: 1.24rem;
 }

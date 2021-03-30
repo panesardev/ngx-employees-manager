@@ -3,6 +3,10 @@
 @import './assets/styles/bootstrap.utilities.css';
 @import './assets/styles/animations.scss';
 
+* {
+  font-family: 'Poppins';
+}
+
 html {
 	scroll-behavior: smooth;
 }
@@ -10,7 +14,6 @@ html {
 body {
 	margin: 0;
 	padding: 0;
-  font-family: 'Open Sans';
   color: $text;
   background-color: $background;
 }
@@ -36,15 +39,15 @@ a {
 button {
   transition: 300ms ease-out;
   outline: none;
-  font-size: 1rem;
+  font-size: .9rem;
   border: .1rem solid transparent;
-  border-radius: 5px;
+  border-radius: $border-radius;
   background-color: $light;
   user-select: none;
 }
 
 button:active:focus {
-  
+  transform: scale(2);
   opacity: 0;
 }
 
@@ -79,29 +82,7 @@ button:hover, a:hover {
 }
 
 .shadow {
-	box-shadow: 0 0 15px rgba(88, 93, 99, 0.315);
-}
-
-.container {
-  padding-right: 15px;
-  padding-left: 15px;
-  margin-right: auto;
-  margin-left: auto;
-}
-@media (min-width: 768px) {
-  .container {
-    width: 850px;
-  }
-}
-@media (min-width: 992px) {
-  .container {
-    width: 1070px;
-  }
-}
-@media (min-width: 1200px) {
-  .container {
-    width: 1270px;
-  }
+	box-shadow: 0 0 10px rgba(88, 93, 99, 0.315);
 }
 
 .heading {
@@ -113,14 +94,16 @@ button:hover, a:hover {
 input {
   outline: none;
   color: $text;
-  border-radius: 5px;
-  border: .1rem solid transparent;
-	box-shadow: 0 0 15px rgba(88, 93, 99, 0.164);
-  padding: .35rem .75rem;
+  border-radius: $border-radius;
+  border: 3px solid transparent;
+	box-shadow: 0 0 6px rgba(88, 93, 99, 0.308);
+  background-color: white;
+  padding: .35rem .7rem;
   font-size: 1rem;
-}
-.input-error {
-  border: .1rem solid $red;
+  transition: 300ms border-bottom ease;
+  &:focus {
+    border-bottom: 3px solid $accent;
+  }
 }
 
 $radioSize: 22px;
@@ -196,5 +179,12 @@ $radioActive: $primary;
 .error-div {
   p {
     color: $red
+  }
+}
+
+@media (min-width: 768px) {
+  .heading {
+    margin-top: unset;
+    margin-bottom: unset;
   }
 }
