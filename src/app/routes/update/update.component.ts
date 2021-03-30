@@ -6,7 +6,7 @@ import { EmployeeService } from 'src/app/services/employee.service';
 @Component({
   selector: 'app-update',
   templateUrl: './update.component.html',
-  styleUrls: ['./update.component.scss']
+  styleUrls: ['./update.component.scss'],
 })
 export class UpdateComponent implements OnInit {
 
@@ -30,10 +30,15 @@ export class UpdateComponent implements OnInit {
   async update(): Promise<void> { 
     if (this.employeeService.validate(this.employee)) {
       await this.employeeService.update(this.employee).toPromise();
-      await this.router.navigate(['home']);
+      await this.home();
     } else {
       this.error = 'ERROR! all fields are required';
     }
+  }
+
+  async home(): Promise<void> {
+    document.querySelector('section').classList.add('fadeOutDown');
+    await this.router.navigate(['home']);
   }
 
   parseDate(dateString: string): Date {

@@ -4,7 +4,7 @@
 		<p class="ques mb-2 mt-4">Are you sure to delete this employee?</p>
 		<p class="name mt-2 mb-4">{{ employee.firstName }} {{ employee.lastName }}</p>
 		<div class="mb-4">
-			<button class="red-btn px-3 py-2 mr-3 shadow" routerLink="/home">Cancel</button>
+			<button class="red-btn px-3 py-2 mr-3 shadow" (click)="home()">Cancel</button>
 			<button class="accent-btn px-3 py-2 shadow" (click)="delete()">Delete Employee</button>
 		</div>
 	</div>

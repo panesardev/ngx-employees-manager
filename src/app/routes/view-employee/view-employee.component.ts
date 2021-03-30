@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Employee } from 'src/app/model/employee.model';
 import { EmployeeService } from 'src/app/services/employee.service';
 
 @Component({
   selector: 'app-view-employee',
   templateUrl: './view-employee.component.html',
-  styleUrls: ['./view-employee.component.scss']
+  styleUrls: ['./view-employee.component.scss'],
 })
 export class ViewEmployeeComponent implements OnInit {
 
@@ -15,7 +15,8 @@ export class ViewEmployeeComponent implements OnInit {
 
   constructor(
     private employeeService: EmployeeService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) { }
 
   async ngOnInit(): Promise<void> {
@@ -24,4 +25,8 @@ export class ViewEmployeeComponent implements OnInit {
     this.dob = new Date(this.employee.dob).toLocaleDateString();
   }
 
+  async goto(to: string): Promise<void> {
+    document.querySelector('section').classList.add('fadeOutDown');
+    await this.router.navigate([to]);
+  }
 }

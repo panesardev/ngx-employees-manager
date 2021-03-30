@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavigationStart, Router } from '@angular/router';
 import { Employee } from 'src/app/model/employee.model';
 import { EmployeeService } from 'src/app/services/employee.service';
 
 @Component({
   selector: 'app-create',
   templateUrl: './create.component.html',
-  styleUrls: ['./create.component.scss']
+  styleUrls: ['./create.component.scss'],
 })
 export class CreateComponent implements OnInit {
 
@@ -18,15 +18,27 @@ export class CreateComponent implements OnInit {
     private router: Router,
   ) { }
 
-  ngOnInit(): void { }
+  ngOnInit(): void { 
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationStart) {
+        document.getElementsByTagName('section')[0].classList.remove('fadeInUp');
+        document.getElementsByTagName('section')[0].classList.add('fadeOutDown');
+      }
+    })
+  }
 
   async create(): Promise<void> {
     if (this.employeeService.validate(this.employee)) {
       await this.employeeService.create(this.employee).toPromise();
-      await this.router.navigate(['home']);
+      await this.home();
     } else {
       this.error = 'ERROR! all fields are required';
     }
+  }
+  
+  async home(): Promise<void> {
+    document.querySelector('section').classList.add('fadeOutDown');
+    await this.router.navigate(['home']);
   }
   
   parseDate(dateString: string): Date {

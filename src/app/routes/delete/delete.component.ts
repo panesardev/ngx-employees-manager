@@ -6,7 +6,7 @@ import { EmployeeService } from 'src/app/services/employee.service';
 @Component({
   selector: 'app-delete',
   templateUrl: './delete.component.html',
-  styleUrls: ['./delete.component.scss']
+  styleUrls: ['./delete.component.scss'],
 })
 export class DeleteComponent implements OnInit {
 
@@ -25,6 +25,11 @@ export class DeleteComponent implements OnInit {
 
   async delete(): Promise<void> {
     await this.employeeService.delete(this.employee.id).toPromise();
+    await this.home();
+  }
+
+  async home(): Promise<void> {
+    document.querySelector('section').classList.add('fadeOutDown');
     await this.router.navigate(['home']);
   }
   

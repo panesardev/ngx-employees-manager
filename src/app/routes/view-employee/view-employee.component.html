@@ -27,8 +27,8 @@
 		</tr>
 	</table>
 	<div class="center my-5">
-		<button class="px-3 py-2 accent-btn mr-3 shadow" routerLink="/home">Home</button>
-		<button class="shadow px-3 py-2 accent-btn mr-3" routerLink="/update/{{ employee.id }}">Update</button>
-		<button class="shadow px-3 py-2 red-btn" routerLink="/delete/{{ employee.id }}">Delete</button>
+		<button class="px-3 py-2 accent-btn mr-3 shadow" (click)="goto('home')">Home</button>
+		<button class="shadow px-3 py-2 accent-btn mr-3" (click)="goto('/update/'+employee.id)">Update</button>
+		<button class="shadow px-3 py-2 red-btn" (click)="goto('/delete/'+employee.id)">Delete</button>
 	</div>
 </section>
