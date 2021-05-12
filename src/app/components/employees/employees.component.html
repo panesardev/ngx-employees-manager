@@ -1,4 +1,4 @@
-<div class="employees" *ngIf="employees; else showLoading">
+<div class="employees" *ngIf="employees$ | async as employees">
 	<div *ngFor="let employee of employees">
 		<app-employee
 			[employee]="employee" 
@@ -8,8 +8,3 @@
 		</app-employee>
 	</div>
 </div>
-<ng-template #showLoading>
-	<div class="my-5">
-		<app-loading></app-loading>
-	</div>
-</ng-template>

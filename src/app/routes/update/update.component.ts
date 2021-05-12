@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Select, Store } from '@ngxs/store';
+import { Observable } from 'rxjs';
 import { Employee } from 'src/app/model/employee.model';
-import { EmployeeService } from 'src/app/services/employee.service';
+import { FindEmployee, UpdateEmployee } from 'src/app/store/employees.actions';
 
 @Component({
   selector: 'app-update',
@@ -10,30 +12,28 @@ import { EmployeeService } from 'src/app/services/employee.service';
 })
 export class UpdateComponent implements OnInit {
 
+  @Select(state => state.employees.employee) employee$: Observable<Employee>;
   employee: Employee = new Employee();
   error: string = null;
 
   constructor(
-    private employeeService: EmployeeService,
+    private store: Store,
     private router: Router,
     private route: ActivatedRoute
-  ) { }
-
-  async ngOnInit(): Promise<void> {
-    const id = this.route.snapshot.params.id;
-    this.employeeService.find(id).subscribe(employee => {
-      this.employee = employee;
-      this.employee.dob = this.parseDate(employee.dob.toString());
+  ) { 
+    this.employee$.subscribe(e => {
+      this.employee = { ...e };
     });
   }
 
+  async ngOnInit(): Promise<void> {
+    const id = this.route.snapshot.params.id;
+    this.store.dispatch(new FindEmployee(id));    
+  }
+
   async update(): Promise<void> { 
-    if (this.employeeService.validate(this.employee)) {
-      await this.employeeService.update(this.employee).toPromise();
-      await this.home();
-    } else {
-      this.error = 'ERROR! all fields are required';
-    }
+    this.store.dispatch(new UpdateEmployee(this.employee));
+    await this.home();
   }
 
   async home(): Promise<void> {
@@ -52,6 +52,14 @@ export class UpdateComponent implements OnInit {
   calculateAge(dob: Date): number {
     const MS_PER_YEAR = 1000 * 60 * 60 * 24 * 365.2425;
     return Math.floor((new Date().getTime() - dob.getTime()) / MS_PER_YEAR);
+  }
+
+  validate(employee: Employee): boolean {
+    let hasErrors: boolean = true;
+    for (const field in employee) {
+      if (field) hasErrors = false;
+    }
+    return hasErrors ? false : true;
   }
 
 }

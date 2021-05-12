@@ -11,12 +11,12 @@ export class EmployeeService {
 
   constructor(private http: HttpClient) { }
 
-  create(employee: Employee): Observable<Employee> {
-    return this.http.post<Employee>(this.URL, employee);
+  create(employee: Employee): Observable<Employee[]> {
+    return this.http.post<Employee[]>(this.URL, employee);
   } 
 
-  update(employee: Employee): Observable<any> {
-    return this.http.put<Employee>(this.URL + employee.id, employee);
+  update(employee: Employee): Observable<Employee[]> {
+    return this.http.put<Employee[]>(this.URL + employee.id, employee);
   } 
   
   find(id: string): Observable<Employee> {
@@ -27,16 +27,7 @@ export class EmployeeService {
     return this.http.get<Employee[]>(this.URL);
   } 
   
-  delete(id: string): Observable<any> {
-    return this.http.delete<Employee>(this.URL + id);
+  delete(id: string): Observable<Employee[]> {
+    return this.http.delete<Employee[]>(this.URL + id);
   } 
-
-  validate(employee: Employee): boolean {
-    let hasErrors: boolean = true;
-    for (const field in employee) {
-      if (field) hasErrors = false;
-    }
-    return hasErrors ? false : true;
-  }
-
 }

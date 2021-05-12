@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationStart, Router } from '@angular/router';
+import { Store } from '@ngxs/store';
 import { Employee } from 'src/app/model/employee.model';
-import { EmployeeService } from 'src/app/services/employee.service';
+import { CreateEmployee } from 'src/app/store/employees.actions';
 
 @Component({
   selector: 'app-create',
@@ -14,7 +15,7 @@ export class CreateComponent implements OnInit {
   error: string = null;
   
   constructor(
-    private employeeService: EmployeeService,
+    private store: Store,
     private router: Router,
   ) { }
 
@@ -28,8 +29,8 @@ export class CreateComponent implements OnInit {
   }
 
   async create(): Promise<void> {
-    if (this.employeeService.validate(this.employee)) {
-      await this.employeeService.create(this.employee).toPromise();
+    if (this.validate(this.employee)) {
+      this.store.dispatch(new CreateEmployee(this.employee));
       await this.home();
     } else {
       this.error = 'ERROR! all fields are required';
@@ -50,6 +51,14 @@ export class CreateComponent implements OnInit {
   calculateAge(dob: Date): number {
     const MS_PER_YEAR = 1000 * 60 * 60 * 24 * 365.2425;
     return Math.floor((new Date().getTime() - dob.getTime()) / MS_PER_YEAR);
+  }
+
+  validate(employee: Employee): boolean {
+    let hasErrors: boolean = true;
+    for (const field in employee) {
+      if (field) hasErrors = false;
+    }
+    return hasErrors ? false : true;
   }
 
 }

@@ -1,37 +1,22 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component,OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable, Subscription } from 'rxjs';
+import { Select, Store } from '@ngxs/store';
+import { Observable } from 'rxjs';
 import { Employee } from 'src/app/model/employee.model';
-import { EmployeeService } from 'src/app/services/employee.service';
+import { FindAllEmployees } from 'src/app/store/employees.actions';
 
 @Component({
   selector: 'app-employees',
   templateUrl: './employees.component.html',
   styleUrls: ['./employees.component.scss']
 })
-export class EmployeesComponent implements OnInit, OnDestroy {
+export class EmployeesComponent implements OnInit {
 
-  private subscription: Subscription;
-  
-  employees: Employee[];
-  loading: boolean;
+  @Select(state => state.employees.employees) employees$: Observable<Employee[]>
 
-  constructor(
-    private employeeService: EmployeeService,
-    private router: Router,
-  ) { }
+  constructor(private router: Router) { }
 
-  ngOnInit(): void {
-    this.loading = true;
-    this.subscription = this.employeeService.findAll().subscribe(employees => {
-      this.employees = employees;
-      this.loading = false;
-    });
-  }
-
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
-  }
+  ngOnInit(): void {}
 
   view(id: string) {
     this.router.navigate(['/employee/' + id]);

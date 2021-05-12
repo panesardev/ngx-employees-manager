@@ -1,4 +1,4 @@
-<section>
+<section *ngIf="employee$ | async as employee">
 	<p class="center my-2 heading">View Employee</p>
 	<table class="my-3">
 		<tr>
@@ -19,7 +19,7 @@
 		</tr>
 		<tr>
 			<td>Date of birth</td>
-			<td>{{ employee.dob.toString().substr(0, 10) }}</td>
+			<td>{{ employee.dob?.toString().substr(0, 10) }}</td>
 		</tr>
 		<tr>
 			<td>Age</td>

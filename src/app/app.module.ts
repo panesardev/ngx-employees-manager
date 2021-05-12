@@ -13,6 +13,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { ViewEmployeeComponent } from './routes/view-employee/view-employee.component';
 import { LoadingComponent } from './components/loading/loading.component';
+import { NgxsModule } from '@ngxs/store';
+import { EmployeesState } from './store/employees.state';
+import { environment } from 'src/environments/environment';
 
 @NgModule({
   declarations: [
@@ -30,7 +33,8 @@ import { LoadingComponent } from './components/loading/loading.component';
     BrowserModule,
     RouterModule.forRoot(routes),
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    NgxsModule.forRoot([EmployeesState], { developmentMode: !environment.production })
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Select, Store } from '@ngxs/store';
+import { Observable } from 'rxjs';
 import { Employee } from 'src/app/model/employee.model';
-import { EmployeeService } from 'src/app/services/employee.service';
+import { DeleteEmployee, FindEmployee } from 'src/app/store/employees.actions';
 
 @Component({
   selector: 'app-delete',
@@ -10,21 +12,21 @@ import { EmployeeService } from 'src/app/services/employee.service';
 })
 export class DeleteComponent implements OnInit {
 
-  employee: Employee = new Employee();
+  @Select(state => state.employees.employee) employee$: Observable<Employee>;
 
   constructor(
-    private employeeService: EmployeeService,
+    private store: Store,
     private router: Router,
     private route: ActivatedRoute
   ) { }
 
   async ngOnInit(): Promise<void> {
     const id = this.route.snapshot.params.id;
-    this.employee = await this.employeeService.find(id).toPromise();
+    this.store.dispatch(new FindEmployee(id));    
   }
 
-  async delete(): Promise<void> {
-    await this.employeeService.delete(this.employee.id).toPromise();
+  async delete(id: string): Promise<void> {
+    this.store.dispatch(new DeleteEmployee(id));
     await this.home();
   }
 
